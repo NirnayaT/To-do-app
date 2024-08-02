@@ -8,8 +8,8 @@ from sqlalchemy import (
     UniqueConstraint,
     ForeignKey,
     Text,
-    Date,
     Enum,
+    Date,
 )
 from datetime import datetime
 from sqlalchemy.orm import sessionmaker, relationship
@@ -44,7 +44,8 @@ class Project(Base):
     description = Column(Text, nullable=True)
     created_at = Column(DateTime(), nullable=False, default=datetime.utcnow)
     owner_id = Column(Integer(), ForeignKey("users.id"), nullable=False)
-
+    start_date = Column(Date, nullable=False)
+    end_date = Column(Date, nullable=True)
     owner = relationship("User", back_populates="projects")
     tasks = relationship("Task", back_populates="project")
 
@@ -59,9 +60,8 @@ class Task(Base):  # main class table
     created_on = Column(DateTime(), default=datetime.now)
     project_id = Column(Integer, ForeignKey("projects.id"), nullable=False)
 
-    project = relationship("Project", back_populates="tasks")  
-    comments = relationship("Comment", back_populates="task")  
-
+    project = relationship("Project", back_populates="tasks")
+    comments = relationship("Comment", back_populates="task")
 
 
 class Comment(Base):

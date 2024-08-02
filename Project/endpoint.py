@@ -21,7 +21,11 @@ router = APIRouter()
 def add_project(payload: CreateProjectPayload):
     return (
         create_project(
-            payload.project_name, payload.project_description, payload.owner_id
+            payload.project_name,
+            payload.project_description,
+            payload.owner_id,
+            payload.start_date,
+            payload.end_date,
         ),
         display_projects(),
     )
@@ -39,6 +43,8 @@ def update_project(payload: UpdateProjectPayload):
             payload.project_id,
             payload.new_project_name,
             payload.new_project_description,
+            payload.start_date,
+            payload.end_date
         ),
         display_projects(),
     )

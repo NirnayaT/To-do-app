@@ -67,7 +67,7 @@ async def update_comment(payload: UpdateCommentPayload) -> UpdateCommentResponse
     return response
 
 
-def display_comments(task_id):  # method for main
+async def display_comments(task_id):  # method for main
     details = comment_instance.get(task_id)
     task_name = get_task_name(task_id)
     response = [

@@ -17,20 +17,20 @@ router = APIRouter()
 
 
 @router.post("/comments/add", dependencies=[Depends(jwtBearer())])
-def add_comment(comment: CreateCommentPayload):
-    return create_comment(comment)
+async def add_comment(comment: CreateCommentPayload):
+    return await create_comment(comment)
 
 
 @router.get("/comments/show", dependencies=[Depends(jwtBearer())])
-def show_comments(task_id):
-    return display_comments(task_id)
+async def show_comments(task_id):
+    return await display_comments(task_id)
 
 
 @router.delete("/comments/remove", dependencies=[Depends(jwtBearer())])
-def delete_comment(payload: RemoveCommentPayload):
-    return remove_comment(payload), display_comments(payload.task_id)
+async def delete_comment(payload: RemoveCommentPayload):
+    return await remove_comment(payload), await display_comments(payload.task_id)
 
 
 @router.put("/comments/update", dependencies=[Depends(jwtBearer())])
-def update_comment(payload: UpdateCommentPayload):
-    return update_comment_route(payload), display_comments(payload.task_id)
+async def update_comment(payload: UpdateCommentPayload):
+    return await update_comment_route(payload), await display_comments(payload.task_id)
